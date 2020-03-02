@@ -31,9 +31,9 @@ def start_vk_bot():
     vk_logger.debug('Bot starts polling')
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            dialogflow_answer_vk(event, vk_api_methods)
+            get_dialogflow_answer_vk(event, vk_api_methods)
 
-def dialogflow_answer_vk(event, vk_api_methods):
+def get_dialogflow_answer_vk(event, vk_api_methods):
     answer = dialogflow_aps.get_dialogflow_answer(event.user_id, event.text)
     if answer == 'Не совсем понимаю, о чём ты.':
         vk_logger.debug('Question was not recognized')
