@@ -9,6 +9,10 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 
 
+logging.config.dictConfig(log_config.LOGGER_CONFIG)
+vk_logger = logging.getLogger('vk_logger')
+
+
 def main():
     load_dotenv()
     while True:
@@ -27,7 +31,7 @@ def start_vk_bot():
     vk_logger.debug('Bot starts polling')
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            dialogflow_answer(event, vk_api_methods)
+            dialogflow_answer_vk(event, vk_api_methods)
 
 def dialogflow_answer_vk(event, vk_api_methods):
     answer = dialogflow_aps.get_dialogflow_answer(event.user_id, event.text)
@@ -42,7 +46,5 @@ def dialogflow_answer_vk(event, vk_api_methods):
     vk_logger.debug(f'Message has been sent to {event.user_id}')
 
 if __name__ == '__main__':
-    logging.config.dictConfig(log_config.LOGGER_CONFIG)
-    vk_logger = logging.getLogger('vk_logger')
     main()
     

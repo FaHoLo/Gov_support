@@ -7,6 +7,10 @@ from dotenv import load_dotenv
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
+logging.config.dictConfig(log_config.LOGGER_CONFIG)
+tg_logger = logging.getLogger('tg_logger')
+
+
 def main():
     load_dotenv()
     while True:
@@ -38,7 +42,5 @@ def dialogflow_answer_tg(bot, update):
     tg_logger.debug(f'Message has been sent to {update.message.from_user.username}')
 
 if __name__ == '__main__':
-    logging.config.dictConfig(log_config.LOGGER_CONFIG)
-    tg_logger = logging.getLogger('tg_logger')
     main()
     
