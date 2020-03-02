@@ -37,7 +37,9 @@ pip install -r requirements.txt
 
 1. Отредактируйте файл `questions.json` по своим требованиям, соблюдая представленное оформление.
 
-2. Запустите функцию `train_bot()` из файла `dialogflow_aps.py`.
+2. Укажите путь к файлу `questions.json` (имя может быть изменено) в `.env` под именем `TRAINING_FILE_PATH`.
+
+3. Запустите функцию `train_bot()` из файла `dialogflow_aps.py`.
 
 ### Цель проекта
 

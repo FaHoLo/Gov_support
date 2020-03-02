@@ -23,7 +23,8 @@ def get_dialogflow_query_result(session_id, text):
     return response.query_result
 
 def train_bot():
-    with open('questions.json', 'r') as training_file:
+    training_file_path = os.getenv('TRAINING_FILE_PATH')
+    with open(training_file_path, 'r') as training_file:
         standard_queries = json.load(training_file)
     
     for intent_name, query_entity in standard_queries.items():
