@@ -31,9 +31,9 @@ def start_vk_bot(vk_token):
     vk_logger.debug('Bot starts polling')
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            get_dialogflow_answer_vk(event, vk_api_methods)
+            send_dialogflow_answer_vk(event, vk_api_methods)
 
-def get_dialogflow_answer_vk(event, vk_api_methods):
+def send_dialogflow_answer_vk(event, vk_api_methods):
     query_result = dialogflow_aps.get_dialogflow_query_result(event.user_id, event.text)
     if query_result.intent.is_fallback:
         vk_logger.debug('Question was not recognized')
