@@ -13,15 +13,15 @@ tg_logger = logging.getLogger('tg_logger')
 
 def main():
     load_dotenv()
+    bot_token = os.getenv('TG_BOT_TOKEN')
     while True:
         try:
-            start_tg_bot()
+            start_tg_bot(bot_token)
         except Exception:
             tg_logger.exception('')
             continue
 
-def start_tg_bot():
-    bot_token = os.getenv('TG_BOT_TOKEN')
+def start_tg_bot(bot_token):
     updater = Updater(bot_token)
     dispatcher = updater.dispatcher
 

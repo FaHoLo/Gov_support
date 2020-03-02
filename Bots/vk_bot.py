@@ -15,15 +15,15 @@ vk_logger = logging.getLogger('vk_logger')
 
 def main():
     load_dotenv()
+    vk_token = os.getenv('VK_GROUP_MESSAGE_TOKEN')
     while True:
         try:
-            start_vk_bot()
+            start_vk_bot(vk_token)
         except Exception:
             vk_logger.exception('')
             continue
 
-def start_vk_bot():
-    vk_token = os.getenv('VK_GROUP_MESSAGE_TOKEN')
+def start_vk_bot(vk_token):
     vk_session = vk_api.VkApi(token=vk_token)
     vk_api_methods = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
