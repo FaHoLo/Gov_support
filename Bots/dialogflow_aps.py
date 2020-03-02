@@ -30,7 +30,11 @@ def train_bot():
     for intent_name, query_entity in standard_queries.items():
         training_phrases_parts = query_entity['questions']
         message_texts = [query_entity['answer']]
-        create_intent(intent_name, training_phrases_parts, message_texts)
+        try:
+            create_intent(intent_name, training_phrases_parts, message_texts)
+            df_logger.debug(f'New intent "{display_name}" was created')
+        except Exception:
+            df_logger.exception('')
 
 def create_intent(display_name, training_phrases_parts, message_texts):
     project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
@@ -46,11 +50,7 @@ def create_intent(display_name, training_phrases_parts, message_texts):
         training_phrases=training_phrases,
         messages=[message],
     )
-    try:
-        intents_client.create_intent(parent, intent)
-        df_logger.debug(f'New intent "{display_name}" was created')
-    except Exception:
-        df_logger.exception('')
+    intents_client.create_intent(parent, intent)
 
 def collect_training_phrases(training_phrases_parts):
     training_phrases = []
