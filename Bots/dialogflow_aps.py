@@ -4,6 +4,9 @@ from logging import getLogger
 import dialogflow_v2 as dialogflow
 
 
+df_logger = getLogger('df_logger')
+
+
 def get_dialogflow_answer(session_id, text):
     language_code = 'ru-RU'
     project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
@@ -16,7 +19,7 @@ def get_dialogflow_answer(session_id, text):
         session=session_client.session_path(project_id, session_id), 
         query_input=query_input
     )
-    getLogger('df_logger').debug('Got response from DialogFlow')
+    df_logger.debug('Got response from DialogFlow')
     return response.query_result.fulfillment_text
 
 def train_bot():
@@ -44,9 +47,9 @@ def create_intent(display_name, training_phrases_parts, message_texts):
     )
     try:
         intents_client.create_intent(parent, intent)
-        getLogger('df_logger').debug(f'New intent "{display_name}" was created')
+        df_logger.debug(f'New intent "{display_name}" was created')
     except Exception:
-        getLogger('df_logger').exception('')
+        df_logger.exception('')
 
 def collect_training_phrases(training_phrases_parts):
     training_phrases = []
