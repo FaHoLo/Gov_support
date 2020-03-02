@@ -7,7 +7,7 @@ import dialogflow_v2 as dialogflow
 df_logger = getLogger('df_logger')
 
 
-def get_dialogflow_answer(session_id, text):
+def get_dialogflow_query_result(session_id, text):
     language_code = 'ru-RU'
     project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
     session_client = dialogflow.SessionsClient()
@@ -20,7 +20,7 @@ def get_dialogflow_answer(session_id, text):
         query_input=query_input
     )
     df_logger.debug('Got response from DialogFlow')
-    return response.query_result.fulfillment_text
+    return response.query_result
 
 def train_bot():
     with open('questions.json', 'r') as training_file:

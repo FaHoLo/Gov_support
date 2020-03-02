@@ -37,8 +37,8 @@ def start(bot, update):
 def get_dialogflow_answer_tg(bot, update):
     chat_id = update.message.chat_id
     text = update.message.text
-    answer = dialogflow_aps.get_dialogflow_answer(chat_id, text)
-    update.message.reply_text(answer)
+    query_result = dialogflow_aps.get_dialogflow_query_result(chat_id, text)
+    update.message.reply_text(query_result.fulfillment_text)
     tg_logger.debug(f'Message has been sent to {update.message.from_user.username}')
 
 if __name__ == '__main__':

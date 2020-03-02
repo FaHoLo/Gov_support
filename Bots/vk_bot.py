@@ -34,13 +34,13 @@ def start_vk_bot():
             get_dialogflow_answer_vk(event, vk_api_methods)
 
 def get_dialogflow_answer_vk(event, vk_api_methods):
-    answer = dialogflow_aps.get_dialogflow_answer(event.user_id, event.text)
-    if answer == 'Не совсем понимаю, о чём ты.':
+    query_result = dialogflow_aps.get_dialogflow_query_result(event.user_id, event.text)
+    if query_result.intent.is_fallback:
         vk_logger.debug('Question was not recognized')
         return
     vk_api_methods.messages.send(
         user_id=event.user_id,
-        message=answer,
+        message=query_result.fulfillment_text,
         random_id=random.randint(1, 10000)
     )
     vk_logger.debug(f'Message has been sent to {event.user_id}')
