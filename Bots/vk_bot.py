@@ -9,11 +9,11 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 
 
-logging.config.dictConfig(log_config.LOGGER_CONFIG)
 vk_logger = logging.getLogger('vk_logger')
 
 
 def main():
+    logging.config.dictConfig(log_config.LOGGER_CONFIG)
     load_dotenv()
     vk_token = os.getenv('VK_GROUP_MESSAGE_TOKEN')
     while True:

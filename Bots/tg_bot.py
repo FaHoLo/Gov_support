@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
-logging.config.dictConfig(log_config.LOGGER_CONFIG)
 tg_logger = logging.getLogger('tg_logger')
 
 
 def main():
+    logging.config.dictConfig(log_config.LOGGER_CONFIG)
     load_dotenv()
     bot_token = os.getenv('TG_BOT_TOKEN')
     while True:
