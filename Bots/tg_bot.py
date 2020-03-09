@@ -11,7 +11,10 @@ tg_logger = logging.getLogger('tg_logger')
 
 
 def main():
-    logging.config.dictConfig(log_config.LOGGER_CONFIG)
+    logging.basicConfig(
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
+        handlers=[log_config.SendToTelegramHandler()]
+    )
     load_dotenv()
     bot_token = os.getenv('TG_BOT_TOKEN')
     while True:

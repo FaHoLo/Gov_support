@@ -3,36 +3,6 @@ import logging
 from telegram import Bot
 
 
-LOGGER_CONFIG = {
-    'version':1,
-        'handlers':{
-            'tgHandler':{
-                'class':'log_config.SendToTelegramHandler',
-                'formatter':'mainFormatter',
-            }
-        },
-        'loggers':{
-            'df_logger':{
-                'handlers':['tgHandler'],
-                'level':'WARNING',
-            },
-            'tg_logger':{
-                'handlers':['tgHandler'],
-                'level':'WARNING',
-            },
-            'vk_logger':{
-                'handlers':['tgHandler'],
-                'level':'WARNING',
-            }
-        },
-        'formatters':{
-            'mainFormatter':{
-                'format':'%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-            }
-        }
-}
-
-
 class SendToTelegramHandler(logging.Handler):
 
     def emit(self, record):
