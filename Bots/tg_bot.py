@@ -1,7 +1,6 @@
 import os
 import log_config
 import logging
-import logging.config
 import dialogflow_aps
 from dotenv import load_dotenv
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters

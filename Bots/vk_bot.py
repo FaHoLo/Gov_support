@@ -2,7 +2,6 @@ import os
 import random
 import log_config
 import logging
-import logging.config
 import dialogflow_aps
 from dotenv import load_dotenv
 from vk_api.longpoll import VkLongPoll, VkEventType
