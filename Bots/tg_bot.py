@@ -1,9 +1,11 @@
-import os
-import log_config
 import logging
+import os
+
 import dialogflow_aps
 from dotenv import load_dotenv
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
+import log_config
 
 
 tg_logger = logging.getLogger('tg_logger')
@@ -11,7 +13,7 @@ tg_logger = logging.getLogger('tg_logger')
 
 def main():
     logging.basicConfig(
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[log_config.SendToTelegramHandler()]
     )
     load_dotenv()
@@ -23,6 +25,7 @@ def main():
             tg_logger.exception('')
             continue
 
+
 def start_tg_bot(bot_token):
     updater = Updater(bot_token)
     dispatcher = updater.dispatcher
@@ -33,8 +36,10 @@ def start_tg_bot(bot_token):
     updater.start_polling()
     updater.idle()
 
+
 def start(bot, update):
     update.message.reply_text('Здравствуйте!')
+
 
 def send_dialogflow_answer_tg(bot, update):
     chat_id = update.message.chat_id
@@ -43,6 +48,6 @@ def send_dialogflow_answer_tg(bot, update):
     update.message.reply_text(query_result.fulfillment_text)
     tg_logger.debug(f'Message has been sent to {update.message.from_user.username}')
 
+
 if __name__ == '__main__':
     main()
-    

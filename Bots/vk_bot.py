@@ -1,11 +1,13 @@
+import logging
 import os
 import random
-import log_config
-import logging
+
 import dialogflow_aps
 from dotenv import load_dotenv
-from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
+from vk_api.longpoll import VkLongPoll, VkEventType
+
+import log_config
 
 
 vk_logger = logging.getLogger('vk_logger')
@@ -13,7 +15,7 @@ vk_logger = logging.getLogger('vk_logger')
 
 def main():
     logging.basicConfig(
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[log_config.SendToTelegramHandler()]
     )
     load_dotenv()
@@ -25,6 +27,7 @@ def main():
             vk_logger.exception('')
             continue
 
+
 def start_vk_bot(vk_token):
     vk_session = vk_api.VkApi(token=vk_token)
     vk_api_methods = vk_session.get_api()
@@ -34,6 +37,7 @@ def start_vk_bot(vk_token):
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             send_dialogflow_answer_vk(event, vk_api_methods)
+
 
 def send_dialogflow_answer_vk(event, vk_api_methods):
     query_result = dialogflow_aps.get_dialogflow_query_result(event.user_id, event.text)
@@ -47,6 +51,6 @@ def send_dialogflow_answer_vk(event, vk_api_methods):
     )
     vk_logger.debug(f'Message has been sent to {event.user_id}')
 
+
 if __name__ == '__main__':
     main()
-    

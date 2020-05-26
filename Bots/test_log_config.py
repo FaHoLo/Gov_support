@@ -24,6 +24,7 @@ def test_split_text_on_parts_with_long_text():
         'text',
     ]
 
+
 def test_split_text_on_parts_with_very_long_text_with_line_break():
     text = 'Very long text that enough for\nfour parts'
     parts = split_text_on_parts(text, 12)
@@ -35,7 +36,7 @@ def test_split_text_on_parts_with_very_long_text_with_line_break():
         'four parts',
     ]
 
-    
+
 def test_split_text_on_parts_with_long_text_with_two_line_breaks():
     text = 'Long\nenough\ntext'
     parts = split_text_on_parts(text, 7)
